@@ -1,0 +1,11 @@
+freexl_close
+freexl_get_FAT_entry
+freexl_get_SST_string
+freexl_get_active_worksheet
+freexl_get_cell_value
+freexl_get_info
+freexl_get_worksheet_name
+freexl_open
+freexl_open_info
+freexl_select_active_worksheet
+freexl_worksheet_dimensions
