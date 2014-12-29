@@ -1,3 +1,4 @@
+EXPORTS
 _get_output_format
 libcharset_relocate
 libcharset_set_relocation_prefix

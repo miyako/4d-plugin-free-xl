@@ -1,3 +1,4 @@
+EXPORTS
 freexl_close
 freexl_get_FAT_entry
 freexl_get_SST_string
