@@ -1,4 +1,4 @@
-4d-free-xl
+4d-plugin-free-xl
 ==========
 
 A plugin to read data from XLS documents using the FreeXL library.
