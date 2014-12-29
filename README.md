@@ -12,6 +12,7 @@ The focus is on data; complex structures such as pivot tables, fonts, macros, fo
 Install
 -------
 The main plugin is for 4D v14 and later; OS X 32/64 bits, 10.8+, Windows 33/64 bits.
+
 The compatibility plugin is for 4D v11 and later; OS X Intel 10.6+, Windows 33/64 bits.
 
 
