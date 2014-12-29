@@ -21,7 +21,10 @@ Example
 $path:=Get 4D folder(Current resources folder)+"tester1.xls"
 
   //opening the .xls file
-$error:=FreeXL_Open ($path;$ref)
+  //similar to freexl_open(), 
+  //except that an abbreviated parsing step is performed. 
+  //This makes it faster, but does not support queries for cell values.
+$error:=FreeXL_Open_info ($path;$ref)
 
   //querying general information
   //FREEXL_CFBF_VER_3 or FREEXL_CFBF_VER_4
