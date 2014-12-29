@@ -70,6 +70,16 @@ For ($i;1;$sheetCount)
 $error:=FreeXL_Get_worksheet_name ($ref;$i;$names{$i})
 End for 
 
+$error:=FreeXL_Set_active_worksheet ($ref;1)
+
+$error:=FreeXL_Worksheet_dimensions ($ref;$rows;$columns)
+
+For ($r;1;$rows)
+For ($c;1;$columns)
+$error:=FreeXL_Get_cell_value ($ref;$r;$c;$integer;$real;$text)
+End for 
+End for 
+
   //close
 $error:=FreeXL_Close ($ref)
 ```
