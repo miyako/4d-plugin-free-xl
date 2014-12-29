@@ -51,3 +51,22 @@ $error:=FreeXL_Get_info ($ref;FREEXL_BIFF_XF_COUNT;$xfCount)
   //close
 $error:=FreeXL_Close ($ref)
 ```
+
+```
+$path:=Get 4D folder(Current resources folder)+"tester1.xls"
+
+  //opening the .xls file
+$error:=FreeXL_Open ($path;$ref)
+
+  //the total number of worksheets
+$error:=FreeXL_Get_info ($ref;FREEXL_BIFF_SHEET_COUNT;$sheetCount)
+  //names of each worksheet
+ARRAY TEXT($names;$sheetCount)
+For ($i;1;$sheetCount)
+  //start from 1
+$error:=FreeXL_Get_worksheet_name ($ref;$i;$names{$i})
+End for 
+
+  //close
+$error:=FreeXL_Close ($ref)
+```
