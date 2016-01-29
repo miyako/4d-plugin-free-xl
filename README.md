@@ -3,6 +3,28 @@
 
 A plugin to read data from XLS documents using the FreeXL library.
 
+##Platform
+
+| carbon | cocoa | win32 | win64 |
+|:------:|:-----:|:---------:|:---------:|
+|🆗|🆗|🆗|🆗|
+
+Commands
+---
+
+```c
+// --- FreeXL
+FreeXL_Get_worksheet_name
+FreeXL_Get_info
+FreeXL_Close
+FreeXL_Open_info
+FreeXL_Open
+FreeXL_Set_active_worksheet
+FreeXL_Get_active_worksheet
+FreeXL_Worksheet_dimensions
+FreeXL_Get_cell_value
+```
+
 About
 -----
 This plugin is a binding of the [FreeXL](https://www.gaia-gis.it/fossil/freexl/index) library.
