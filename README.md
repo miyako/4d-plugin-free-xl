@@ -30,11 +30,20 @@ This plugin is a binding of the [FreeXL](https://www.gaia-gis.it/fossil/freexl/i
 
 The focus is on data; complex structures such as pivot tables, fonts, macros, formats are all igonred.
 
-Install
--------
-The main plugin is for 4D v14 and later; OS X 32/64 bits, 10.8+, Windows 32/64 bits.
+###Update
 
-The compatibility plugin is for 4D v11 and later; OS X Intel 10.6+, Windows 32/64 bits.
+``FreeXL_Get_cell_value`` now returns the cell value type in ``$7``. The type can be one of the following:
+
+``
+FREEXL_CELL_NULL 101
+FREEXL_CELL_INT 102
+FREEXL_CELL_DOUBLE 103
+FREEXL_CELL_TEXT 104
+FREEXL_CELL_SST_TEXT 105
+FREEXL_CELL_DATE 106
+FREEXL_CELL_DATETIME 107
+FREEXL_CELL_TIME 108
+``
 
 Example
 -------
