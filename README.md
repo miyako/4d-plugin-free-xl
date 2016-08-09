@@ -86,7 +86,7 @@ $error:=FreeXL_Close ($ref)
 ```
 
 ```
-$path:=Get 4D folder(Current resources folder)+"tester1.xls"
+$path:=Get 4D folder(Current resources folder)+"test.xls"
 
   //opening the .xls file
 $error:=FreeXL_Open ($path;$ref)
@@ -106,7 +106,11 @@ $error:=FreeXL_Worksheet_dimensions ($ref;$rows;$columns)
 
 For ($r;1;$rows)
 For ($c;1;$columns)
-$error:=FreeXL_Get_cell_value ($ref;$r;$c;$integer;$real;$text)
+$error:=FreeXL_Get_cell_value ($ref;$r;$c;\
+$intValue;\
+$realValue;\
+$textValue;\
+$valueType)
 End for 
 End for 
 
