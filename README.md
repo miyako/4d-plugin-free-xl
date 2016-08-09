@@ -34,7 +34,7 @@ The focus is on data; complex structures such as pivot tables, fonts, macros, fo
 
 ``FreeXL_Get_cell_value`` now returns the cell value type in ``$7``. The type can be one of the following:
 
-```
+```c
 FREEXL_CELL_NULL 101
 FREEXL_CELL_INT 102
 FREEXL_CELL_DOUBLE 103
