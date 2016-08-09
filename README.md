@@ -12,17 +12,16 @@ A plugin to read data from XLS documents using the FreeXL library.
 Commands
 ---
 
-```c
-// --- FreeXL
-FreeXL Get worksheet name
-FreeXL Get info
-FreeXL Close
-FreeXL Open info
-FreeXL Open
-FreeXL Set active worksheet
-FreeXL Get active worksheet
-FreeXL Worksheet dimensions
-FreeXL Get cell value
+```
+FreeXL_Get_worksheet_name
+FreeXL_Get_info
+FreeXL_Close
+FreeXL_Open_info
+FreeXL_Open
+FreeXL_Set_active_worksheet
+FreeXL_Get_active_worksheet
+FreeXL_Worksheet_dimensions
+FreeXL_Get_cell_value
 ```
 
 About
