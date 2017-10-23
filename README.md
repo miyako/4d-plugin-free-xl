@@ -1,7 +1,7 @@
 4d-plugin-free-xl
 ==========
 
-A plugin to read data from XLS documents using the FreeXL library.
+A plugin to read data from XLS documents using the FreeXL library
 
 ## Platform
 
