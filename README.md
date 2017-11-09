@@ -49,7 +49,7 @@ FREEXL_CELL_DATETIME 107
 FREEXL_CELL_TIME 108
 ```
 
-Example
+Examples
 -------
 ```
 $path:=Get 4D folder(Current resources folder)+"tester1.xls"
