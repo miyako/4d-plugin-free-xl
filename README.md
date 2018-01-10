@@ -44,7 +44,7 @@ This plugin is a binding of the [FreeXL](https://www.gaia-gis.it/fossil/freexl/i
 
 The focus is on data; complex structures such as pivot tables, fonts, macros, formats are all igonred.
 
-###Update
+### New in 1.1
 
 ``FreeXL_Get_cell_value`` now returns the cell value type in ``$7``. The type can be one of the following:
 
