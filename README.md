@@ -13,6 +13,10 @@ A plugin to read data from XLS documents using the FreeXL library
 
 <img src="https://cloud.githubusercontent.com/assets/1725068/18940649/21945000-8645-11e6-86ed-4a0f800e5a73.png" width="32" height="32" /> <img src="https://cloud.githubusercontent.com/assets/1725068/18940648/2192ddba-8645-11e6-864d-6d5692d55717.png" width="32" height="32" />
 
+### Releases
+
+[2.0](https://github.com/miyako/4d-plugin-free-xl/releases/tag/2.0)
+
 ### Build Information
 
 library version [1.0.4](http://www.gaia-gis.it/gaia-sins/freexl-1.0.4.tar.gz)
