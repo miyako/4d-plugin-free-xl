@@ -10,6 +10,8 @@
 
 #include "freexl.h"
 
+#include <mutex>
+
 // --- FreeXL
 void FreeXL_Get_worksheet_name(sLONG_PTR *pResult, PackagePtr pParams);
 void FreeXL_Get_info(sLONG_PTR *pResult, PackagePtr pParams);

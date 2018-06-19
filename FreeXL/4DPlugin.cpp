@@ -12,13 +12,15 @@
 #include "4DPluginAPI.h"
 #include "4DPlugin.h"
 
-#include "freexl.h"
-
 #pragma mark - map object references to number
 
 typedef const void *xls_handle;
 std::map<uint32_t, xls_handle> __handles;
+
 uint32_t __handleSet(xls_handle h){
+	
+	std::mutex m;
+	std::lock_guard<std::mutex> lock(m);
 	
 	uint32_t i = 1;
 	
@@ -33,6 +35,9 @@ uint32_t __handleSet(xls_handle h){
 
 xls_handle __handleGet(uint32_t i){
 	
+	std::mutex m;
+	std::lock_guard<std::mutex> lock(m);
+	
 	xls_handle h = NULL;
 	
 	std::map<uint32_t, xls_handle>::iterator pos = __handles.find(i);
@@ -45,6 +50,9 @@ xls_handle __handleGet(uint32_t i){
 }
 
 void __handleClear(uint32_t i){
+	
+	std::mutex m;
+	std::lock_guard<std::mutex> lock(m);
 	
 	xls_handle h = NULL;
 	
