@@ -15,7 +15,7 @@ A plugin to read data from XLS documents using the [FreeXL](https://www.gaia-gis
 
 ### Releases
 
-[2.1](https://github.com/miyako/4d-plugin-snowball/releases/tag/2.1)
+[2.1](https://github.com/miyako/4d-plugin-free-xl/releases/tag/2.1)
 
 ![preemption xx](https://user-images.githubusercontent.com/1725068/41327179-4e839948-6efd-11e8-982b-a670d511e04f.png)
 
