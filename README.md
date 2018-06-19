@@ -1,7 +1,7 @@
 4d-plugin-free-xl
 ==========
 
-A plugin to read data from XLS documents using the FreeXL library
+A plugin to read data from XLS documents using the [FreeXL](https://www.gaia-gis.it/fossil/freexl/index) library
 
 ## Platform
 
@@ -11,9 +11,13 @@ A plugin to read data from XLS documents using the FreeXL library
 
 ### Version
 
-<img src="https://cloud.githubusercontent.com/assets/1725068/18940649/21945000-8645-11e6-86ed-4a0f800e5a73.png" width="32" height="32" /> <img src="https://cloud.githubusercontent.com/assets/1725068/18940648/2192ddba-8645-11e6-864d-6d5692d55717.png" width="32" height="32" />
+<img src="https://cloud.githubusercontent.com/assets/1725068/18940649/21945000-8645-11e6-86ed-4a0f800e5a73.png" width="32" height="32" /> <img src="https://cloud.githubusercontent.com/assets/1725068/18940648/2192ddba-8645-11e6-864d-6d5692d55717.png" width="32" height="32" /> <img src="https://user-images.githubusercontent.com/1725068/41266195-ddf767b2-6e30-11e8-9d6b-2adf6a9f57a5.png" width="32" height="32" />
 
 ### Releases
+
+[2.1](https://github.com/miyako/4d-plugin-free-xl/releases/tag/2.1)
+
+![preemption xx](https://user-images.githubusercontent.com/1725068/41327179-4e839948-6efd-11e8-982b-a670d511e04f.png)
 
 [2.0](https://github.com/miyako/4d-plugin-free-xl/releases/tag/2.0)
 
@@ -44,7 +48,7 @@ This plugin is a binding of the [FreeXL](https://www.gaia-gis.it/fossil/freexl/i
 
 The focus is on data; complex structures such as pivot tables, fonts, macros, formats are all igonred.
 
-###Update
+### New in 1.1
 
 ``FreeXL_Get_cell_value`` now returns the cell value type in ``$7``. The type can be one of the following:
 
