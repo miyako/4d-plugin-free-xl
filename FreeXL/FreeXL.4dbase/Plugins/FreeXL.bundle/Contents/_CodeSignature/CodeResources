@@ -104,7 +104,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			B9+cqgadiBpeJuaiHuChGV2IQx0=
+			fEYDGZKTMVznFbXYHLrqQZ7xg7U=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -395,11 +395,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			B9+cqgadiBpeJuaiHuChGV2IQx0=
+			fEYDGZKTMVznFbXYHLrqQZ7xg7U=
 			</data>
 			<key>hash2</key>
 			<data>
-			FabEin1FBgWebyYdaopoZUolszq0WMZnzX7tPB513As=
+			7iWoZJxRpqdTHy97wXjN/sBTIhX5bM039MDHmtxjmd4=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -419,22 +419,110 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			wjlyi3hJe435qgnn/6SVraDrZH0=
+			QREbnVjlABVdNuo9t9lch7NSEX8=
 			</data>
 			<key>hash2</key>
 			<data>
-			7LLPnE2UFdt0YRy1ivVSxYo5QAb2Pc4FTcKwbtm0K9o=
+			oLllrj1IzffwfLPpMGFbRo4NhT826vKcstFOlQGEz5o=
+			</data>
+		</dict>
+		<key>Windows/FreeXL.exp</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			LFijfYOJ5DokGplx4m63Vbgy1Hw=
+			</data>
+			<key>hash2</key>
+			<data>
+			vfzKMCK5S+gaOKZBr16Lxc5Sy/BgaF3OspSr+JjKVgM=
+			</data>
+		</dict>
+		<key>Windows/FreeXL.iobj</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			iS8G1CWwRrWJNZVIuKEFxkTsAhk=
+			</data>
+			<key>hash2</key>
+			<data>
+			RLFzcudf/9nAamA/khaW+OlIK6df65DK4zkG/D7V5p4=
+			</data>
+		</dict>
+		<key>Windows/FreeXL.ipdb</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			q9DoZLqdRNp/yl9fiT2APYFjWqo=
+			</data>
+			<key>hash2</key>
+			<data>
+			d7BNzeThno3osfxMz+33JykwlkeujwuFvWmouBy8kYc=
+			</data>
+		</dict>
+		<key>Windows/FreeXL.lib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			WbV0PUhkqs2j9f5EAgpFPnA0BwY=
+			</data>
+			<key>hash2</key>
+			<data>
+			NNG7MHFLA7+IMJNJUQqlOpwLT9dCvPHy5rFQRi4UulQ=
 			</data>
 		</dict>
 		<key>Windows64/FreeXL.4DX</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			kaE6Hc9YYJVqDhZO18FvNfQ4cZE=
+			VGwL8QsrClg4YAgJc5EqKl0W6+g=
 			</data>
 			<key>hash2</key>
 			<data>
-			c85FjMstDTrJcuzRcPgWMWuITLvxdaN//zLL8tYsEYw=
+			8OxkGknNRnKzG9xfUec4w+gHPgkIbeXt5MOwFsT6iDM=
+			</data>
+		</dict>
+		<key>Windows64/FreeXL.exp</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			e0K1SmQSm37PHMnpl3/d8OxSgYs=
+			</data>
+			<key>hash2</key>
+			<data>
+			fueYAAOH2WI0VAsIzXmLgx9lhxdKtXyEZ5a++HYUeFM=
+			</data>
+		</dict>
+		<key>Windows64/FreeXL.iobj</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			DBepc11q2HUw9dBegybnmOCg3W0=
+			</data>
+			<key>hash2</key>
+			<data>
+			0hhaRUmcioOxaALXpqLW78esyupyLrXC30d+X80hSxc=
+			</data>
+		</dict>
+		<key>Windows64/FreeXL.ipdb</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			j1/XY58+cVoJLqlfa35mKbUv0IU=
+			</data>
+			<key>hash2</key>
+			<data>
+			biKRGcmql08WVLkCmy1U7ys1VfSbm/qj76m2nNQNIJI=
+			</data>
+		</dict>
+		<key>Windows64/FreeXL.lib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			UpWPG76miFbQU4bWrwbuhF5BkT4=
+			</data>
+			<key>hash2</key>
+			<data>
+			2mKaoH9qOdUTzkGLbmWQbcPqVjHtwAJ7j0y/PKYecP4=
 			</data>
 		</dict>
 		<key>manifest.json</key>

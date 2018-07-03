@@ -14,13 +14,14 @@
 
 #pragma mark - map object references to number
 
+std::mutex globalMutex;
+
 typedef const void *xls_handle;
 std::map<uint32_t, xls_handle> __handles;
 
 uint32_t __handleSet(xls_handle h){
 	
-	std::mutex m;
-	std::lock_guard<std::mutex> lock(m);
+	std::lock_guard<std::mutex> lock(globalMutex);
 	
 	uint32_t i = 1;
 	
@@ -35,8 +36,7 @@ uint32_t __handleSet(xls_handle h){
 
 xls_handle __handleGet(uint32_t i){
 	
-	std::mutex m;
-	std::lock_guard<std::mutex> lock(m);
+	std::lock_guard<std::mutex> lock(globalMutex);
 	
 	xls_handle h = NULL;
 	
@@ -51,8 +51,7 @@ xls_handle __handleGet(uint32_t i){
 
 void __handleClear(uint32_t i){
 	
-	std::mutex m;
-	std::lock_guard<std::mutex> lock(m);
+	std::lock_guard<std::mutex> lock(globalMutex);
 	
 	xls_handle h = NULL;
 	
