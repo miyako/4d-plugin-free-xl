@@ -1,0 +1,14 @@
+{
+	"Sources/Methods/Get_info.4dm": {
+		"left": 270,
+		"top": 120,
+		"width": 901,
+		"height": 660
+	},
+	"Sources/Methods/Get_cell_data.4dm": {
+		"left": 270,
+		"top": 103,
+		"width": 901,
+		"height": 660
+	}
+}

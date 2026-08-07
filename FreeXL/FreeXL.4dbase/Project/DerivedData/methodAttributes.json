@@ -1,0 +1,16 @@
+{
+	"methods": {
+		"Get_info": {
+			"timeStamp": "2026-08-07T06:59:30Z",
+			"attributes": {
+				"preemptive": "capable"
+			}
+		},
+		"Get_cell_data": {
+			"timeStamp": "2026-08-07T06:59:30Z",
+			"attributes": {
+				"preemptive": "capable"
+			}
+		}
+	}
+}
