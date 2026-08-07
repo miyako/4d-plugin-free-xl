@@ -59,6 +59,32 @@ jobs:
       - name: setup MSBuild
         uses: microsoft/setup-msbuild@v2
 
+      # The checked-in lib\64\freexl.lib was built once, years ago, with the
+      # legacy v140 (VS2015) toolset and Whole Program Optimization enabled
+      # (see FreeXL.vcxproj's Release|x64 <PlatformToolset>v140</PlatformToolset>
+      # + <WholeProgramOptimization>true</WholeProgramOptimization>, which
+      # match that binary's own embedded "-compiler:...VC\bin\x86_amd64\c2.dll"
+      # LTCG stamp for VS 14.0). /GL-compiled objects need the *same* compiler
+      # version at link time to finish code generation, so as soon as the
+      # runner's bundled toolset drifts far enough from v140, linking this
+      # binary fails with LNK/C1047 ("created by a different version of the
+      # compiler"), even though the plugin's own sources compile fine.
+      #
+      # Fix: rebuild freexl.lib from source in this job, with whatever
+      # toolset the runner actually has (the same v143 override used for the
+      # main build below), instead of linking the years-old prebuilt binary.
+      # Source: github.com/miyako/msvc-freexl (same author, same project
+      # layout as this plugin's own vcxproj) - pinned to a specific commit
+      # since this dependency has no tagged releases.
+      - name: rebuild freexl.lib
+        shell: cmd
+        run: |
+          git clone https://github.com/miyako/msvc-freexl.git msvc-freexl
+          cd msvc-freexl
+          git checkout 7a867b7f7a1506a8ede066ca3b35ea3bc1c00459
+          msbuild "freexl.sln" /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143 /p:WindowsTargetPlatformVersion=10.0 /m
+          copy /Y "x64\Release\freexl.lib" "..\lib\64\freexl.lib"
+
       # GitHub-hosted windows-latest ships VS2022 (v143 toolset) but not the
       # legacy v140 toolset the project is pinned to, so we override it on
       # the command line rather than requiring an extra VS component install.
@@ -73,6 +99,10 @@ jobs:
       # builds). "10.0" lets MSBuild resolve to whatever full 10.0.xxxxx.x SDK
       # is actually installed on the runner, rather than pinning an exact
       # build number that may not match the image.
+      #
+      # This must use the same PlatformToolset as the freexl.lib rebuild
+      # above -- linking objects from two different toolset versions is
+      # exactly the C1047 failure this whole rebuild step exists to avoid.
       - name: build x64
         shell: cmd
         run: msbuild "${{ env.VCX_SOLUTION }}" /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143 /p:WindowsTargetPlatformVersion=10.0 /m
