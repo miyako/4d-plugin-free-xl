@@ -11,6 +11,8 @@
 #include "freexl.h"
 
 #include <mutex>
+#include <map>
+#include <cstdint>
 
 // --- FreeXL
 void FreeXL_Get_worksheet_name(sLONG_PTR *pResult, PackagePtr pParams);

@@ -67,17 +67,27 @@ void __handleClear(uint32_t i){
 
 void PluginMain(PA_long32 selector, PA_PluginParameters params)
 {
+	PA_long32 pProcNum = selector;
+	sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
+	PackagePtr pParams = (PackagePtr)params->fParameters;
+
 	try
 	{
-		PA_long32 pProcNum = selector;
-		sLONG_PTR *pResult = (sLONG_PTR *)params->fResult;
-		PackagePtr pParams = (PackagePtr)params->fParameters;
-		
 		CommandDispatcher(pProcNum, pResult, pParams);
 	}
 	catch(...)
 	{
-		
+		// Every command in manifest.json declares a ":L" return value, so 4D
+		// is always waiting on *pResult. If a handler throws before it calls
+		// returnValue.setReturn(pResult) (e.g. std::bad_alloc from the handle
+		// map or a string wrapper), swallowing the exception here without
+		// still writing *pResult would leave the host waiting forever for a
+		// return that never comes -- a freeze, not just a lost error code.
+		// Writing a sentinel value here guarantees a return happens on every
+		// path, even ones we didn't anticipate inside a specific handler.
+		if(pResult){
+			*pResult = (sLONG_PTR)FREEXL_INSUFFICIENT_MEMORY;
+		}
 	}
 }
 
@@ -192,9 +202,15 @@ void FreeXL_Close(sLONG_PTR *pResult, PackagePtr pParams)
 	xls_handle h = __handleGet(Param1.getIntValue());
 	if(h){
 		error = freexl_close(h);
-		if(FREEXL_OK == error){
-			__handleClear(Param1.getIntValue());
-		}
+		// freexl.h's doc comment for freexl_close is unconditional: "After
+		// calling freexl_close() any related resource will be released, and
+		// the handle will no longer be valid" -- it isn't written as "...on
+		// success". Clearing our map entry only when error == FREEXL_OK (the
+		// original code) would leave a stale entry pointing at a handle the
+		// library already considers invalid if freexl_close ever returns a
+		// non-OK code, and a later FreeXL_* call on that same $ref would
+		// then operate on a dead handle. Clear it unconditionally instead.
+		__handleClear(Param1.getIntValue());
 	}
 	
 	returnValue.setIntValue(error);
@@ -216,6 +232,13 @@ void FreeXL_Open_info(sLONG_PTR *pResult, PackagePtr pParams)
 	int error = freexl_open_info((const char *)path.c_str(), &h);
 	if(FREEXL_OK == error){
 		Param2.setIntValue(__handleSet(h));
+	}else{
+		// freexl.h's own doc comment for freexl_open_info: "You are expected
+		// to freexl_close() even on failure, so as to correctly release any
+		// dynamic memory allocation." On failure we never hand the caller a
+		// handle number, so they have no way to call FreeXL_Close themselves
+		// -- we have to release it here or it leaks every time open fails.
+		freexl_close(h);
 	}
 	
 	Param2.toParamAtIndex(pParams, 2);
@@ -239,6 +262,10 @@ void FreeXL_Open(sLONG_PTR *pResult, PackagePtr pParams)
 	int error = freexl_open((const char *)path.c_str(), &h);
 	if(FREEXL_OK == error){
 		Param2.setIntValue(__handleSet(h));
+	}else{
+		// Same leak-on-failure fix as FreeXL_Open_info above -- see comment
+		// there for the exact doc-comment citation from freexl.h.
+		freexl_close(h);
 	}
 	
 	Param2.toParamAtIndex(pParams, 2);
