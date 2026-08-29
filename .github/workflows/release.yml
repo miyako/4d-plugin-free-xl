@@ -105,7 +105,7 @@ jobs:
       - name: build FreeXL static library (matching plugin toolset)
         shell: cmd
         run: |
-          msbuild "msvc-freexl\freexl.sln" /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=%FREEXL_TOOLSET% /m
+          msbuild "msvc-freexl\freexl.sln" /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=%FREEXL_TOOLSET% /p:WindowsTargetPlatformVersion=10.0 /m
 
       - name: stage freshly-built freexl.lib over the vendored copy
         shell: pwsh
