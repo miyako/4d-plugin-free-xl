@@ -53,16 +53,12 @@ jobs:
   build-windows:
     name: Build Windows (x64)
     needs: version
-    # Pinned (not windows-latest): the vendored lib\64\freexl.lib was built
-    # against the VS2022-era MSVC toolchain. "windows-latest" silently moved
-    # to the windows-2025-vs2026 image (VS 2026 / MSVC 14.44), and linking
-    # fresh v143 objects from that compiler against the older freexl.lib
-    # fails with LNK1257/C1047 ("created by a different version of the
-    # compiler"). PlatformToolset=v143 below does NOT pin the compiler
-    # version - v143 spans VS2022 through VS2026 - so it did not protect us.
-    # Keep this pinned to windows-2022 until freexl.lib is rebuilt from
-    # source in this workflow (see TODO below) instead of vendored.
-    runs-on: windows-2022
+    # Not pinning the runner image matters less now: the real incompatibility
+    # is between two repos' toolsets, not runner drift (see below), so
+    # windows-latest is fine here.
+    runs-on: windows-latest
+    env:
+      FREEXL_TOOLSET: v143   # must match the PlatformToolset used to build FreeXL.sln below
     steps:
       - uses: actions/checkout@v4
         with:
@@ -81,10 +77,56 @@ jobs:
           Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "$base/Plugins/Default"
           Remove-Item -Recurse -Force -ErrorAction SilentlyContinue "Objs"
 
+      # ---------------------------------------------------------------
+      # Root cause (found via CI log analysis of run 90100150022):
+      # The vendored lib\64\freexl.lib comes from the sister repo
+      # miyako/msvc-freexl, whose freexl.vcxproj hardcodes
+      # PlatformToolset=v140 with WholeProgramOptimization (/GL) enabled.
+      # This plugin's own build below uses PlatformToolset=v143, also
+      # with /GL. MSVC's /GL-LTCG intermediate object format is not
+      # guaranteed compatible across toolset generations, so linking a
+      # v140-built /GL static lib against v143-built /GL objects fails
+      # deterministically with:
+      #   LINK : fatal error C1047: ...was created by a different version
+      #   of the compiler...
+      #   LINK : fatal error LNK1257: code generation failed
+      # This is NOT fixed by pinning the runner OS/VS image - it's a
+      # structural mismatch between the two repos' project files, so it
+      # will fail on *any* runner as long as the vendored .lib is v140.
+      # Fix: build freexl.lib from source here, with the SAME toolset
+      # (v143) as the plugin, instead of linking the vendored binary.
+      # ---------------------------------------------------------------
+      - name: checkout FreeXL library source (miyako/msvc-freexl)
+        uses: actions/checkout@v4
+        with:
+          repository: miyako/msvc-freexl
+          path: msvc-freexl
+
+      - name: build FreeXL static library (matching plugin toolset)
+        shell: cmd
+        run: |
+          msbuild "msvc-freexl\freexl.sln" /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=%FREEXL_TOOLSET% /m
+
+      - name: stage freshly-built freexl.lib over the vendored copy
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force -Path "lib\64" | Out-Null
+
+          $built = Get-ChildItem -Recurse -Path "msvc-freexl" -Filter "freexl.lib" -ErrorAction SilentlyContinue | Select-Object -First 1
+          if (-not $built) {
+            Get-ChildItem -Recurse "msvc-freexl" -Filter "*.lib" | ForEach-Object { Write-Host $_.FullName }
+            Write-Error "freexl.lib not found after building msvc-freexl - check output path above"
+            exit 1
+          }
+          Write-Host "Built freexl.lib at: $($built.FullName)"
+
+          Copy-Item $built.FullName "lib\64\freexl.lib" -Force
+          Write-Host "Replaced lib\64\freexl.lib with freshly-built, toolset-matched version."
+
       - name: build x64
         shell: cmd
         run: |
-          msbuild "%PRODUCT_NAME%.sln" /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143 /p:WindowsTargetPlatformVersion=10.0 /m
+          msbuild "%PRODUCT_NAME%.sln" /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=%FREEXL_TOOLSET% /p:WindowsTargetPlatformVersion=10.0 /m
 
       - name: normalize windows output to canonical case
         shell: pwsh
