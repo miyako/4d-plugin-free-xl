@@ -53,7 +53,16 @@ jobs:
   build-windows:
     name: Build Windows (x64)
     needs: version
-    runs-on: windows-latest
+    # Pinned (not windows-latest): the vendored lib\64\freexl.lib was built
+    # against the VS2022-era MSVC toolchain. "windows-latest" silently moved
+    # to the windows-2025-vs2026 image (VS 2026 / MSVC 14.44), and linking
+    # fresh v143 objects from that compiler against the older freexl.lib
+    # fails with LNK1257/C1047 ("created by a different version of the
+    # compiler"). PlatformToolset=v143 below does NOT pin the compiler
+    # version - v143 spans VS2022 through VS2026 - so it did not protect us.
+    # Keep this pinned to windows-2022 until freexl.lib is rebuilt from
+    # source in this workflow (see TODO below) instead of vendored.
+    runs-on: windows-2022
     steps:
       - uses: actions/checkout@v4
         with:
